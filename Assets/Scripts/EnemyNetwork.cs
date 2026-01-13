@@ -7,15 +7,21 @@ public class EnemyNetwork : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private List<Transform> walkPoints;
+  
+
+
 
     private int currentWalkPointIndex = 0;
 
     private void Awake()
     {
+
         agent = GetComponent<NavMeshAgent>();
     }
     private void Start()
     {
+
+
         if (walkPoints.Count > 0)
         {
             agent.SetDestination(walkPoints[0].position);
@@ -54,6 +60,6 @@ public class EnemyNetwork : MonoBehaviour
         // - reducér liv
         // - despawn enemy
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
