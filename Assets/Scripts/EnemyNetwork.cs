@@ -1,26 +1,29 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyNetwork : MonoBehaviour
+public class EnemyNetwork : NetworkBehaviour
 {
-    [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private List<Transform> walkPoints;
-  
-
-
-
-    private int currentWalkPointIndex = 0;
+    private NavMeshAgent agent;
+    private List<Transform> walkPoints;
+    private int currentWalkPointIndex;
 
     private void Awake()
     {
-
         agent = GetComponent<NavMeshAgent>();
+
     }
     private void Start()
     {
-
+        GivePath();
+    }
+    public void GivePath()
+    {
+        walkPoints = EnemyPath.instance.walkPoints;
+        
+        currentWalkPointIndex = 0;
 
         if (walkPoints.Count > 0)
         {
@@ -35,7 +38,9 @@ public class EnemyNetwork : MonoBehaviour
 
     private void MoveAlongPath()
     {
-        if (walkPoints.Count == 0) return;
+        if (walkPoints.Count == 0)
+            
+        return;
 
         if (!agent.pathPending && agent.remainingDistance <= 0.2f)
         {

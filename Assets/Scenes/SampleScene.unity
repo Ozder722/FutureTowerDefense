@@ -160,7 +160,7 @@ MonoBehaviour:
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
     Address: 127.0.0.1
-    Port: 7771
+    Port: 7773
     ServerListenAddress: 127.0.0.1
   DebugSimulator:
     PacketDelayMS: 0
@@ -2037,8 +2037,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1505720657}
+  - component: {fileID: 1505720658}
   m_Layer: 0
-  m_Name: Walkpoints
+  m_Name: EnemyRoute
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2066,6 +2067,27 @@ Transform:
   - {fileID: 2009244136}
   m_Father: {fileID: 74443951}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1505720658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505720656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7061070d0a2da0479796596fa904913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPath
+  walkPoints:
+  - {fileID: 375198380}
+  - {fileID: 345372469}
+  - {fileID: 147339653}
+  - {fileID: 1793548455}
+  - {fileID: 463678753}
+  - {fileID: 972334776}
+  - {fileID: 2009244136}
+  - {fileID: 950612874}
 --- !u!1 &1538435401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,7 +2518,15 @@ MonoBehaviour:
     - enemyPrefab: {fileID: 2963423065548556118, guid: 28855735b1d2a6e47b34545320ed9c29, type: 3}
       count: 3
       spawnDelay: 0.5
+    - enemyPrefab: {fileID: 2963423065548556118, guid: 28855735b1d2a6e47b34545320ed9c29, type: 3}
+      count: 4
+      spawnDelay: 0.6
+  - enemies:
+    - enemyPrefab: {fileID: 2963423065548556118, guid: 53ebb1d7ad201a94a8118cdba748e58a, type: 3}
+      count: 4
+      spawnDelay: 1
   spawnPoint: {fileID: 1538435402}
+  enemyPath: {fileID: 1505720658}
 --- !u!4 &1753967299
 Transform:
   m_ObjectHideFlags: 0

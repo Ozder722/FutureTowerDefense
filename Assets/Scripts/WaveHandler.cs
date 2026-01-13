@@ -4,10 +4,12 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class WaveHandler : NetworkBehaviour
 {
     [SerializeField] private List<Wave> waves;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private EnemyPath enemyPath;
 
     private int currentWaveIndex;
     private int aliveEnemies;
@@ -16,8 +18,8 @@ public class WaveHandler : NetworkBehaviour
     {
         Debug.Log("OnNetworkSpawn");
         if (!IsServer) return;
-        StartNextWave();
-
+        StartCoroutine(StartNextWave());
+        
     }
 
     private IEnumerator StartNextWave()
@@ -47,19 +49,13 @@ public class WaveHandler : NetworkBehaviour
         GameObject enemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
         enemy.GetComponent<NetworkObject>().Spawn();
 
+       
+
         aliveEnemies++;
         enemy.GetComponent<EnemyHealth>().OnEnemyRemoved += HandleEnemyDeath;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!IsServer) return;
-
-        if (other.CompareTag("EndPoint"))
-        {
-            GetComponent<EnemyHealth>().RemoveEnemy();
-        }
-    }
+   
     private void HandleEnemyDeath()
     {
         aliveEnemies--;
