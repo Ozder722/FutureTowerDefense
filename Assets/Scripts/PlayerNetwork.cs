@@ -14,13 +14,7 @@ public class PlayerNetwork : NetworkBehaviour
 
         TestMovement();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) //og ghosttower=true
-        {
-            if (TryGetMouseWorldPosition(out Vector3 spawnPos) )
-            {
-                SpawnTowerServerRpc(spawnPos);
-            }
-        }
+
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -43,14 +37,7 @@ public class PlayerNetwork : NetworkBehaviour
     }
 
 
-    [ServerRpc]
-    private void SpawnTowerServerRpc(Vector3 spawnpos)
-    {
-        spawnObj = Instantiate(spawnObjPrefab, spawnpos, Quaternion.identity);
-
-        NetworkObject netObj = spawnObj.GetComponent<NetworkObject>();
-        netObj.SpawnWithOwnership(OwnerClientId);
-    }
+    
 
 
 
