@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class WaveHandler : NetworkBehaviour
 {
@@ -11,15 +11,26 @@ public class WaveHandler : NetworkBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private EnemyPath enemyPath;
 
+
+    [SerializeField] private GameObject NextWave;
+
     private int currentWaveIndex;
     private int aliveEnemies;
 
-    public override void OnNetworkSpawn()
+    //public override void OnNetworkSpawn()
+    //{
+    //    Debug.Log("OnNetworkSpawn");
+    //    if (!IsServer) return;
+    //    StartCoroutine(StartNextWave());
+
+    //}
+    
+    //funktion kaldes af knap
+    public void StartGame()
     {
-        Debug.Log("OnNetworkSpawn");
-        if (!IsServer) return;
+        NextWave.SetActive(false);
         StartCoroutine(StartNextWave());
-        
+
     }
 
     private IEnumerator StartNextWave()
@@ -64,7 +75,7 @@ public class WaveHandler : NetworkBehaviour
         if (aliveEnemies <= 0)
         {
             currentWaveIndex++;
-            StartCoroutine(StartNextWave());
+            NextWave.SetActive(true);
         }
     }
 }

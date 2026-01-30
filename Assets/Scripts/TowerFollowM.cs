@@ -1,10 +1,17 @@
+
+
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class TowerFollowM : NetworkBehaviour
 {
-    [SerializeField] GameObject testTower;
+    [SerializeField] GameObject Tower1;
+    
+
+    [SerializeField] GameObject Tower1Prefab;
+    private GameObject previewTower1;
+
 
     private TowerChecker towerChecker; // reference til TowerChecker
     GameObject chosenTower;
@@ -12,48 +19,53 @@ public class TowerFollowM : NetworkBehaviour
 
     void Update()
     {
-        if (!IsOwner) return; // kun lokal spiller
+        
 
-        if (chosenTower != null && !placed)
+        if (previewTower1 != null && !placed)
         {
             FollowMouse();
-            
+
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            RequestSpawnTowerServerRpc();
-        }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && towerChecker.placeAble)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && previewTower1 != null && towerChecker.placeAble)
         {
             if (TryGetMouseWorldPosition(out Vector3 spawnPos))
             {
                 SpawnTowerServerRpc(spawnPos);
+                Destroy(previewTower1);
             }
         }
 
-        
+
+
     }
+
+    public void PreviewTower()
+    {
+        previewTower1 = Instantiate(Tower1Prefab);
+        towerChecker = previewTower1.GetComponent<TowerChecker>();
+    }
+
 
     
 
-
-    [ServerRpc]
-    private void SpawnTowerServerRpc(Vector3 spawnpos)
+    [ServerRpc(RequireOwnership =false)]
+    private void SpawnTowerServerRpc(Vector3 spawnPos)
     {
-        GameObject tower = Instantiate(chosenTower, spawnpos, Quaternion.identity);
+        GameObject tower = Instantiate(Tower1, spawnPos, Quaternion.identity);
 
         NetworkObject netObj = tower.GetComponent<NetworkObject>();
-        netObj.SpawnWithOwnership(OwnerClientId);
+        netObj.Spawn();
     }
+
 
 
 
     [ServerRpc]
     public void RequestSpawnTowerServerRpc()
     {
-        GameObject tower = Instantiate(testTower);
+        GameObject tower = Instantiate(Tower1);
         tower.GetComponent<NetworkObject>().Spawn();
 
         chosenTower = tower;
@@ -65,12 +77,13 @@ public class TowerFollowM : NetworkBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        
+
 
         if (Physics.Raycast(ray, out hit))
         {
             hit.point = new Vector3(hit.point.x, 0.5f, hit.point.z);
-            chosenTower.transform.position = hit.point;
+            //chosenTower.transform.position = hit.point;
+            previewTower1.transform.position = hit.point;
         }
     }
     private bool TryGetMouseWorldPosition(out Vector3 worldPos)
