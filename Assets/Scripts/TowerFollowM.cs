@@ -17,6 +17,7 @@ public class TowerFollowM : NetworkBehaviour
     GameObject chosenTower;
     public bool placed;
 
+    //[SerializeField] float hightOffSet;
     void Update()
     {
         
@@ -86,6 +87,9 @@ public class TowerFollowM : NetworkBehaviour
             previewTower1.transform.position = hit.point;
         }
     }
+
+
+
     private bool TryGetMouseWorldPosition(out Vector3 worldPos)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

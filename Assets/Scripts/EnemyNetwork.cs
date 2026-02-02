@@ -42,7 +42,7 @@ public class EnemyNetwork : NetworkBehaviour
             
         return;
 
-        if (!agent.pathPending && agent.remainingDistance <= 0.2f)
+        if (!agent.pathPending && agent.remainingDistance <= 0.5f)
         {
             currentWalkPointIndex++;
 
