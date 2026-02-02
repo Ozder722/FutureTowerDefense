@@ -7,5 +7,8 @@ public class LevelSelect : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
     }
-    
+    public void Back()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
 }
