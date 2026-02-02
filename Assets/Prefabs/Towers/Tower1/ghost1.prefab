@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6050767482332021962}
   - component: {fileID: -27124663309924395}
   m_Layer: 0
-  m_Name: SpawnObject 1
+  m_Name: ghost1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
