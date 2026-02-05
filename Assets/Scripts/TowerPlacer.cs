@@ -31,14 +31,7 @@ public class TowerPlacer : NetworkBehaviour
         }
 
 
-        //if (Input.GetKeyDown(KeyCode.Mouse0) && previewTower != null && towerChecker.placeAble)
-        //{
-        //    if (TryGetMouseWorldPosition(out Vector3 spawnPos))
-        //    {
-        //        SpawnTowerServerRpc(spawnPos);
-        //        Destroy(previewTower);
-        //    }
-        //}
+        
         if (Input.GetKeyDown(KeyCode.Mouse0) && previewTower != null && towerChecker.placeAble)
         {
             if (TryGetMouseWorldPosition(out Vector3 spawnPos))
@@ -69,13 +62,7 @@ public class TowerPlacer : NetworkBehaviour
 
 
     [ServerRpc(RequireOwnership = false)]
-    //private void SpawnTowerServerRpc(Vector3 spawnPos)
-    //{
-    //    GameObject tower = Instantiate(Tower1, spawnPos, Quaternion.identity);
-
-    //    NetworkObject netObj = tower.GetComponent<NetworkObject>();
-    //    netObj.Spawn();
-    //}
+   
     void SpawnTowerServerRpc(int towerIndex, Vector3 spawnPos)
     {
         TowerData data = towerDatabase.towers[towerIndex];
