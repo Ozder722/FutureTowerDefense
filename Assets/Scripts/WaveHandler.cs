@@ -11,6 +11,7 @@ public class WaveHandler : NetworkBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private EnemyPath enemyPath;
     [SerializeField] private GameObject victoryCanvas;
+    [SerializeField] private GameObject gameOverCanvas;
 
 
     [SerializeField] private GameObject NextWave;
@@ -41,7 +42,7 @@ public class WaveHandler : NetworkBehaviour
         if (currentWaveIndex >= waves.Count)
         {
             Debug.Log("ALLE WAVES KLARET");
-            ShowVictoryUIClientRpc();
+            ShowVictoryUI();
             yield break;
         }
 
@@ -58,14 +59,21 @@ public class WaveHandler : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    private void ShowVictoryUIClientRpc()
+    private void ShowVictoryUI()
     {
         if (victoryCanvas != null)
         {
             victoryCanvas.SetActive(true);
         }
     }
+
+    //private void ShowGameOverUI()
+    //{
+    //    if (victoryCanvas != null)
+    //    {
+    //        victoryCanvas.SetActive(true);
+    //    }
+    //}
 
     private void SpawnEnemy(GameObject prefab)
     {
