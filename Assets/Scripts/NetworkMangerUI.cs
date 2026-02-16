@@ -48,8 +48,10 @@ public class NetworkMangerUI : MonoBehaviour
         LobbyData.HostCode = code;
 
         NetworkManager.Singleton.StartHost();
-
-        statusText.text = "Host Code: " + code;
+        if (statusText != null)
+        {
+            statusText.text = "Host Code: " + code;
+        }
         Debug.Log(code);
     }
 
@@ -59,7 +61,10 @@ public class NetworkMangerUI : MonoBehaviour
 
         if (enteredCode != LobbyData.HostCode)
         {
-            statusText.text = "Wrong Code!";
+            if (statusText != null)
+            {
+                statusText.text = "Wrong Code!";
+            }
             return;
         }
 
@@ -71,7 +76,11 @@ public class NetworkMangerUI : MonoBehaviour
     {
         if (clientId == NetworkManager.Singleton.LocalClientId)
         {
-            statusText.text = "Connected!";
+            if (statusText != null)
+            {
+
+                statusText.text = "Connected!";
+            }
         }
     }
 
@@ -79,7 +88,11 @@ public class NetworkMangerUI : MonoBehaviour
     {
         if (clientId == NetworkManager.Singleton.LocalClientId)
         {
-            statusText.text = "Connection Failed";
+            if (statusText != null)
+            {
+                statusText.text = "Connection Failed";
+
+            }
         }
     }
 
