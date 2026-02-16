@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 public class WaveHandler : NetworkBehaviour
 {
-    [SerializeField] private List<Wave> waves;
+    [SerializeField] public List<Wave> waves;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private EnemyPath enemyPath;
 
 
     [SerializeField] private GameObject NextWave;
-
-    private int currentWaveIndex;
+    public int waveCounter;
+    public int currentWaveIndex=0;
     private int aliveEnemies;
 
     //public override void OnNetworkSpawn()
@@ -35,6 +35,7 @@ public class WaveHandler : NetworkBehaviour
 
     private IEnumerator StartNextWave()
     {
+        waveCounter = currentWaveIndex;
         Debug.Log("StartNextWave");
         if (currentWaveIndex >= waves.Count)
         {
