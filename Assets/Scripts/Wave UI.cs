@@ -4,6 +4,8 @@ using TMPro;
 public class WaveUI : MonoBehaviour
 {
     [SerializeField] private WaveHandler waveHandler;
+    [SerializeField] private WaveHandler waves;
+    [SerializeField] private WaveHandler currentWaveIndex;
     [SerializeField] private TMP_Text currentWave;
     [SerializeField] private TMP_Text allWaves;
 
@@ -14,16 +16,14 @@ public class WaveUI : MonoBehaviour
         currentWave.text = waveHandler.waveCounter.ToString();
     }
 
-    // Vi fjerner Update() helt, da det er "overkill" at tjekke hver frame
-    // for noget, der kun sker ved et klik.
-
     public void PlayButtonPressed()
     {
-        // 1. Læg 1 til din waveCounter
-        waveHandler.waveCounter++;
+            // + 1 til din waveCounter
+            waveHandler.waveCounter++;
 
-        // 2. Opdatér teksten med den nye værdi
-        currentWave.text = waveHandler.waveCounter.ToString();
+            // Opdatere teksten
+            currentWave.text = waveHandler.waveCounter.ToString();
+     
     }
 
 }
