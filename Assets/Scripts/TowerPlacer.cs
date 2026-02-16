@@ -36,7 +36,7 @@ public class TowerPlacer : NetworkBehaviour
         {
             if (TryGetMouseWorldPosition(out Vector3 spawnPos))
             {
-                SpawnTowerServerRpc(selectedTowerIndex, spawnPos);
+                SpawnTowerServerRpc(selectedTowerIndex, spawnPos); // får null reference her
                 Destroy(previewTower);
                 selectedTowerIndex = -1;
             }
