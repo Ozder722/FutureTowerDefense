@@ -92,7 +92,7 @@ public class WaveHandler : NetworkBehaviour
     private void HandleEnemyDeath()
     {
         aliveEnemies--;
-        playerHealth=-10;
+        playerHealth-=10;
         
         if (playerHealth <= 0)
         {
