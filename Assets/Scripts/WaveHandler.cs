@@ -12,13 +12,15 @@ public class WaveHandler : NetworkBehaviour
     [SerializeField] private EnemyPath enemyPath;
     [SerializeField] private GameObject victoryCanvas;
     [SerializeField] private GameObject gameOverCanvas;
-
+   // [SerializeField] private 
 
     [SerializeField] private GameObject NextWave;
     public int waveCounter;
     public int currentWaveIndex=0;
     private int aliveEnemies;
 
+    // spiller variabler\\
+    public int playerHealth = 100;
     //public override void OnNetworkSpawn()
     //{
     //    Debug.Log("OnNetworkSpawn");
@@ -26,7 +28,7 @@ public class WaveHandler : NetworkBehaviour
     //    StartCoroutine(StartNextWave());
 
     //}
-    
+
     //funktion kaldes af knap
     public void StartGame()
     {
@@ -67,13 +69,13 @@ public class WaveHandler : NetworkBehaviour
         }
     }
 
-    //private void ShowGameOverUI()
-    //{
-    //    if (victoryCanvas != null)
-    //    {
-    //        victoryCanvas.SetActive(true);
-    //    }
-    //}
+    private void ShowGameOverUI()
+    {
+        if (gameOverCanvas != null)
+        {
+            gameOverCanvas.SetActive(true);
+        }
+    }
 
     private void SpawnEnemy(GameObject prefab)
     {
@@ -90,14 +92,20 @@ public class WaveHandler : NetworkBehaviour
     private void HandleEnemyDeath()
     {
         aliveEnemies--;
+        playerHealth=-10;
         
-
+        if (playerHealth <= 0)
+        {
+            ShowGameOverUI();
+        }
         if (aliveEnemies <= 0)
         {
             currentWaveIndex++;
             NextWave.SetActive(true);
         }
     }
+
+   
 }
 
 
