@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 94981302af5b99e489c385f8916d8b1a
-folderAsset: yes
-DefaultImporter:
+guid: 3078bec9135c81c4eb1a079ccae94271
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -10,6 +10,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 351298
   packageName: "[FreeTrial] Bioflare Scorpion (Rig + Animation) \u2013 PixeliusVita"
-  packageVersion: 
-  assetPath: Assets/Stylized3DMonster/Documentation/
-  uploadId: 0
+  packageVersion: 1.0
+  assetPath: Assets/Stylized3DMonster/Monster14_FreeTrial/Shader_Texture/Shader/Monster14_04.mat
+  uploadId: 837720
