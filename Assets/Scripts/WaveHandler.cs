@@ -122,10 +122,10 @@ private IEnumerator StartNextWave()
         aliveEnemies--;
         //playerHealth-=10;
 
-        //if (playerHealth <= 0)
-        //{
-        //    ShowGameOverUI();
-        //}
+        if (playerHealth.Value <= 0)
+        {
+            ShowGameOverUI();
+        }
         if (IsServer)
         {
             playerHealth.Value -= 10;
