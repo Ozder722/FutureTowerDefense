@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class WaveHandler : NetworkBehaviour
 {
@@ -20,7 +22,7 @@ public class WaveHandler : NetworkBehaviour
     private int aliveEnemies;
 
     // spiller variabler\\
-    public int playerHealth = 100;
+    //public int playerHealth = 100;
     //public override void OnNetworkSpawn()
     //{
     //    Debug.Log("OnNetworkSpawn");
@@ -37,7 +39,17 @@ public class WaveHandler : NetworkBehaviour
 
     }
 
-    private IEnumerator StartNextWave()
+     // hvis du bruger TextMeshPro
+
+    [SerializeField] private TMP_Text healthText;
+
+    public NetworkVariable<int> playerHealth = new NetworkVariable<int>(
+    100,
+    NetworkVariableReadPermission.Everyone,
+    NetworkVariableWritePermission.Server
+    );
+
+private IEnumerator StartNextWave()
     {
         waveCounter = currentWaveIndex;
         Debug.Log("StartNextWave");
@@ -59,6 +71,22 @@ public class WaveHandler : NetworkBehaviour
                 yield return new WaitForSeconds(enemyData.spawnDelay);
             }
         }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        playerHealth.OnValueChanged += OnHealthChanged;
+        UpdateHealthUI(playerHealth.Value);
+    }
+    private void OnHealthChanged(int oldValue, int newValue)
+    {
+        UpdateHealthUI(newValue);
+    }
+
+    private void UpdateHealthUI(int health)
+    {
+        if (healthText != null)
+            healthText.text = "Health: " + health.ToString();
     }
 
     private void ShowVictoryUI()
@@ -92,11 +120,15 @@ public class WaveHandler : NetworkBehaviour
     private void HandleEnemyDeath()
     {
         aliveEnemies--;
-        playerHealth-=10;
-        
-        if (playerHealth <= 0)
+        //playerHealth-=10;
+
+        //if (playerHealth <= 0)
+        //{
+        //    ShowGameOverUI();
+        //}
+        if (IsServer)
         {
-            ShowGameOverUI();
+            playerHealth.Value -= 10;
         }
         if (aliveEnemies <= 0)
         {
