@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Grafik-Level 1.unity
     guid: 34062f6c92a046943b6e5bb59989fc78
+  - enabled: 1
+    path: Assets/Scenes/Map2.unity
+    guid: f2fca52f4e96e894d9a83bd2bf20d8cf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
