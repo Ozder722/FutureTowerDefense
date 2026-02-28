@@ -86,7 +86,7 @@ private IEnumerator StartNextWave()
     private void UpdateHealthUI(int health)
     {
         if (healthText != null)
-            healthText.text = "Health: " + health.ToString();
+            healthText.text = health.ToString();
     }
 
     private void ShowVictoryUI()
