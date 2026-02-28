@@ -6703,7 +6703,7 @@ GameObject:
   - component: {fileID: 794315134}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: PlaceAble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14849,7 +14849,7 @@ GameObject:
   - component: {fileID: 1608479079}
   m_Layer: 0
   m_Name: Prism
-  m_TagString: Untagged
+  m_TagString: PlaceAble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
