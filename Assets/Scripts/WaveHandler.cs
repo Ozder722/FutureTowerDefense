@@ -121,15 +121,16 @@ private IEnumerator StartNextWave()
     {
         aliveEnemies--;
         //playerHealth-=10;
+        if (IsServer)
+        {
+            playerHealth.Value -= 10;
+        }
 
         if (playerHealth.Value <= 0)
         {
             ShowGameOverUI();
         }
-        if (IsServer)
-        {
-            playerHealth.Value -= 10;
-        }
+       
         if (aliveEnemies <= 0)
         {
             currentWaveIndex++;
