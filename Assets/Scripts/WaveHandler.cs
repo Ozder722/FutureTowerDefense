@@ -21,16 +21,6 @@ public class WaveHandler : NetworkBehaviour
     public int currentWaveIndex=0;
     private int aliveEnemies;
 
-    // spiller variabler\\
-    //public int playerHealth = 100;
-    //public override void OnNetworkSpawn()
-    //{
-    //    Debug.Log("OnNetworkSpawn");
-    //    if (!IsServer) return;
-    //    StartCoroutine(StartNextWave());
-
-    //}
-
     //funktion kaldes af knap
     public void StartGame()
     {
@@ -78,10 +68,7 @@ private IEnumerator StartNextWave()
         playerHealth.OnValueChanged += OnHealthChanged;
         UpdateHealthUI(playerHealth.Value);
     }
-    private void OnHealthChanged(int oldValue, int newValue)
-    {
-        UpdateHealthUI(newValue);
-    }
+  
 
     private void UpdateHealthUI(int health)
     {
@@ -116,7 +103,22 @@ private IEnumerator StartNextWave()
         enemy.GetComponent<EnemyHealth>().OnEnemyRemoved += HandleEnemyDeath;
     }
 
-   
+    private void OnHealthChanged(int oldValue, int newValue)
+    {
+        UpdateHealthUI(newValue);
+
+        // Kun serveren må afgøre game over
+        if (IsServer && newValue <= 0)
+        {
+            GameOverClientRpc();
+        }
+    }
+
+    [ClientRpc]
+    private void GameOverClientRpc()
+    {
+        ShowGameOverUI();
+    }
     private void HandleEnemyDeath()
     {
         aliveEnemies--;
@@ -126,10 +128,7 @@ private IEnumerator StartNextWave()
             playerHealth.Value -= 10;
         }
 
-        if (playerHealth.Value <= 0)
-        {
-            ShowGameOverUI();
-        }
+       
        
         if (aliveEnemies <= 0)
         {
@@ -140,8 +139,6 @@ private IEnumerator StartNextWave()
 
    
 }
-
-
 
 [System.Serializable]
 public class EnemySpawnData
